@@ -1,0 +1,35 @@
+import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.DirectoryStream;
+import java.io.IOException;
+
+
+public class Exam 
+{
+	public static void main(String [] args)
+	{
+		Scanner input = new Scanner(System.in);
+		System.out.printf("enter a file or a directory name");
+		Path path =  Paths.get(input.nextLine());
+		
+		if(Files.exists(path))
+		{
+			System.out.printf("%s exists%n", path.getFileName());
+			System.out.printf("%s directory %n", (Files.isDirectory(path)? "is": "is not"));
+			System.out.printf("%s absolute path%n",( path.isAbsolute()? "is": "is not") );
+			try{
+			System.out.printf("last modified : %s%n", Files.getLastModifiedTime(path));
+			System.out.printf("size : %s%n", Files.size(path));}
+			catch (IOException ioex)
+			{
+				System.out.printf("not possible ");
+			}
+			System.out.printf("path : %s%n", path);
+			System.out.printf("toAbsolutePath : %s%n", path.toAbsolutePath());
+		}
+		else 
+			System.out.printf("file not  found%n ");
+	}
+}
